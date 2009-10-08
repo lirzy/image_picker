@@ -1,5 +1,6 @@
 <div style="width: 500px">
   <%= hidden_field_tag :target_field, @field %>
+  <%= hidden_field_tag :image_picker_url, url_for(:controller=>params[:controller], :action=>params[:action])%>
   <%= hidden_field_tag :default_image, "/images/no_image.jpg" %>
   
   <div style="float:right">
@@ -18,8 +19,9 @@
         <tr>
           <% e.compact.each do |i| -%>
             <td style="text-align:center" valign="top">
-              <%= link_to_remote image_tag(i.thumbnail, :alt => i.title), :url => {:action => "pick", :field => @field, :id => i}, :method => :post %>
-              <br/>
+              <div style="width: <%=i.thumbnail_size.first%>px; height: <%=i.thumbnail_size.second%>px;" >
+				<%= link_to_remote image_tag(i.thumbnail, :alt => i.title), :url =>{:action => "pick", :field => @field, :id => i}, :method => :post %>
+				</div>
               <strong><%= i.title %></strong>
               <% if i.respond_to?(:description) -%>
                 <br/>
