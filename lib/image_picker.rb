@@ -6,6 +6,11 @@ module ImagePicker
     html += link_to_function image_tag(current_image ? current_image.thumbnail : "no_image.jpg", :id => field), "ImagePicker.open_picker({field:'#{field}', url:'#{url}'})"
     html += hidden_field_tag "#{field}", (current_image ? current_image.id : '')
   end
+    
+  def image_picker_includes
+    javascript_include_tag( 'modalbox', 'image_picker') <<
+	stylesheet_link_tag('modalbox')
+  end
 end
 
 ActionView::Base.send :include, ImagePicker
@@ -29,6 +34,7 @@ module ImagePickerTagHelper
 	
 	[hidden_field_html,  link_html].join("\n")
   end
+
 end
 
 ActionView::Helpers::FormBuilder.send :include, ImagePickerTagHelper
