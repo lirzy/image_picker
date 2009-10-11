@@ -19,7 +19,6 @@ ActionView::Base.send :include, ImagePicker
 module ImagePickerTagHelper
   include ActionView::Helpers
   
-  
   def image_picker_field(method, image_record=nil, options = {})
     url = @template.url_for :action => "open_picker"
 	options[:value] ||= image_record.id if image_record
